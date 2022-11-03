@@ -1,20 +1,13 @@
 import React, { useState, useEffect, useContext } from "react";
-import PropTypes from "prop-types";
-import { Link, useParams } from "react-router-dom";
 import { Context } from "../store/appContext";
-import rigoImageUrl from "../../img/rigo-baby.jpg";
+import { Home } from "./home";
 
 export const Single = (props) => {
   const { store, actions } = useContext(Context);
-  const params = useParams();
 
   return (
     <div className="jumbotron">
-      <h1>Authenticaded</h1>
+      {store.verifiedUser ? <h1>Authorized</h1> : <Home />}
     </div>
   );
-};
-
-Single.propTypes = {
-  match: PropTypes.object,
 };

@@ -12,6 +12,7 @@ from api.routes import api
 from api.admin import setup_admin
 from api.commands import setup_commands
 
+from flask_jwt_extended import JWTManager
 #from models import Person
 
 ENV = os.getenv("FLASK_ENV")
@@ -20,6 +21,9 @@ app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 # database condiguration
+app.config["JWT_SECRET_KEY"] = "super-secret"  # Change this "super secret" with something else!
+jwt = JWTManager(app)
+
 db_url = os.getenv("DATABASE_URL")
 if db_url is not None:
     app.config['SQLALCHEMY_DATABASE_URI'] = db_url.replace("postgres://", "postgresql://")
